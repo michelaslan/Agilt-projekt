@@ -156,43 +156,64 @@ function usernameExists(username) {
 
 
 function renderAddPlayer() {
-
     const teamSelect = document.getElementById("teamSelect")
+    const error = document.getElementById("error")
+
     teamSelect.innerHTML = `
         <option value="A" ${teamA.length >= 7 ? "disabled" : ""}>
-        ${teamAName}
+            ${teamAName}${teamA.length >= 7 ? " -full-" : ""}
         </option>
 
         <option value="B" ${teamB.length >= 7 ? "disabled" : ""}>
-        ${teamBName}
+            ${teamBName}${teamB.length >= 7 ? " -full-" : ""}
         </option>
-        `
+    `
+
+    let message = ""
+    
+    if (teamA.length >= 7) {
+        message += `${teamAName} är fullt och kan inte ta emot fler spelare.\n`
+    }
+    
+    if (teamB.length >= 7) {
+        message += `${teamBName} är fullt och kan inte ta emot fler spelare.`
+    }
+    
+    error.textContent = message
 
     loadEuropeanCountries();
-    document.getElementById("playerForm").addEventListener("submit", e => {
 
+    document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
-        const username = document.getElementById("username").value
-        if (usernameExists(username)) {
-            document.getElementById("error").textContent = "Username already exists"
+
+        const team = document.getElementById("teamSelect").value
+
+        if (team === "A" && teamA.length >= 7) {
+            error.textContent = `${teamAName} är fullt.`
             return
         }
+
+        if (team === "B" && teamB.length >= 7) {
+            error.textContent = `${teamBName} är fullt.`
+            return
+        }
+
         const player = {
-            username,
+            username: document.getElementById("username").value,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             age: document.getElementById("age").value,
             country: document.getElementById("country").value,
             ranking: document.getElementById("ranking").value
-
         };
-        const team = document.getElementById("teamSelect").value
+
         if (team === "A") {
             teamA.push(player)
         }
         if (team === "B") {
             teamB.push(player)
         }
+
         save()
         window.location.href = "index.html"
     })
