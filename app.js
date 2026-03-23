@@ -32,13 +32,15 @@ function renderPlayer(p, team) {
     li.className = "player"
 
     li.innerHTML = `
-    <span onclick="goToPlayer('${p.username}')">${p.username}</span>
-    <button onclick="removePlayer('${team}','${p.username}')">
-        Remove
-    </button>
-    <button onclick="switchTeam('${team}','${p.username}')">
-        Switch
-    </button>
+        <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+        
+        <div class="player-actions">
+        <button title="Remove Player" class="player-btn" onclick="removePlayer('${team}','${p.username}')">
+            ✘
+        </button>
+        <button title="Switch Team" class="player-btn switch-btn" onclick="switchTeam('${team}','${p.username}')">
+            ⇄
+        </button>
     `
 
     return li
@@ -87,6 +89,7 @@ function renderHome() {
     if (teamA.length < 3){
         teamASize.innerHTML = `
         Players: ${teamA.length}/7
+        <br>
         OBS: You need atleast 3 players in the team!
         `
     }
@@ -98,6 +101,7 @@ function renderHome() {
     if (teamB.length < 3){
         teamBSize.innerHTML = `
         Players: ${teamB.length}/7
+        <br>
         OBS: You need atleast 3 players in the team!
         `
     }
