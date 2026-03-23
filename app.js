@@ -172,20 +172,25 @@ function renderAddPlayer() {
     let message = ""
     
     if (teamA.length >= 7) {
-        message += `${teamAName} är fullt och kan inte ta emot fler spelare.\n`
+        message += `${teamAName} is full and can't take more players.<br>`
     }
     
     if (teamB.length >= 7) {
-        message += `${teamBName} är fullt och kan inte ta emot fler spelare.`
+        message += `${teamBName} is full and can't take more players.`
     }
     
-    error.textContent = message
+    error.innerHTML = message
 
     loadEuropeanCountries();
 
     document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
 
+        if (teamA.length >= 7 && teamB.length >= 7) {
+            alert("Both teams are full. You can't add more players.")
+            return
+        }
+        
         const team = document.getElementById("teamSelect").value
 
         if (team === "A" && teamA.length >= 7) {
