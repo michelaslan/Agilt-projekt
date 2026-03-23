@@ -241,6 +241,7 @@ function renderPlayerInfo() {
         <button onclick="window.location='index.html'">
         Back
         </button>
+        <button onclick="editPlayer('${player.username}')">Edit</button>
         </div>
         `
 }
