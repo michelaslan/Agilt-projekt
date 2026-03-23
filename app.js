@@ -71,6 +71,8 @@ function renderHome() {
     document.getElementById("teamBName").textContent = teamBName
     const listA = document.getElementById("teamAList")
     const listB = document.getElementById("teamBList")
+    const teamASize = document.getElementById("teamA-p");
+    const teamBSize = document.getElementById("teamB-p");
     listA.innerHTML = ""
     listB.innerHTML = ""
     
@@ -81,6 +83,29 @@ function renderHome() {
     teamB.forEach(p => {
         listB.appendChild(renderPlayer(p, "B"))
     })
+
+    if (teamA.length < 3){
+        teamASize.innerHTML = `
+        Players: ${teamA.length}/7
+        OBS: You need atleast 3 players in the team!
+        `
+    }
+    else {
+        teamASize.innerHTML = `
+        Players: ${teamA.length}/7
+        `
+    }
+    if (teamB.length < 3){
+        teamBSize.innerHTML = `
+        Players: ${teamB.length}/7
+        OBS: You need atleast 3 players in the team!
+        `
+    }
+    else {
+        teamBSize.innerHTML = `
+        Players: ${teamB.length}/7
+        `
+    }
 }
 
 
@@ -92,12 +117,12 @@ function goToPlayer(username) {
 
 function switchTeam(team, username) {
 
-    if (team === "A" && teamB.length < 5) {
+    if (team === "A" && teamB.length < 7) {
         const player = teamA.find(p => p.username === username)
         teamA = teamA.filter(p => p.username !== username)
         teamB.push(player)
     } 
-    else if (team === "B" && teamA.length < 5) {
+    else if (team === "B" && teamA.length < 7) {
         const player = teamB.find(p => p.username === username)
         teamB = teamB.filter(p => p.username !== username)
         teamA.push(player)
@@ -134,11 +159,11 @@ function renderAddPlayer() {
 
     const teamSelect = document.getElementById("teamSelect")
     teamSelect.innerHTML = `
-        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        <option value="A" ${teamA.length >= 7 ? "disabled" : ""}>
         ${teamAName}
         </option>
 
-        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        <option value="B" ${teamB.length >= 7 ? "disabled" : ""}>
         ${teamBName}
         </option>
         `
