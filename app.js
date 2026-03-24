@@ -157,8 +157,8 @@ function removePlayer(team, username) {
 
 
 function usernameExists(username) {
-            teamA.some(p => p.username === username) ||
-            teamB.some(p => p.username === username)
+            return teamA.some(p => p.username === username) ||
+            teamB.some(p => p.username === username);
 }
 
 
