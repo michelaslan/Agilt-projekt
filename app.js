@@ -238,8 +238,7 @@ function renderPlayerInfo() {
 
     const username = localStorage.getItem("selectedPlayer")
 
-    const player = teamA.find(p => p.username === username)
-
+    const player = [...teamA, ...teamB].find(p => p.username === username)
     const profile = document.getElementById("profile");
 
     profile.innerHTML = `
