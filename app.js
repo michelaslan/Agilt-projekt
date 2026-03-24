@@ -360,4 +360,23 @@ return {
         avgRank: avgRank.toFixed(1)
     }
 }
+function renderTeamStats() {
+    const team = localStorage.getItem("selectedTeam")
 
+    let list = team === "A" ? teamA : teamB
+    let stats = getTeamStats(list)
+
+    const div = document.getElementById("stats")
+
+    if (stats.error) {
+        div.innerHTML = `<p>${stats.error}</p>`
+        return
+    }
+
+    div.innerHTML = `
+        <h2>Team ${team}</h2>
+        <p><b>Antal spelare:</b> ${stats.count}</p>
+        <p><b>Genomsnittlig ålder:</b> ${stats.avgAge}</p>
+        <p><b>Genomsnittlig rank:</b> ${stats.avgRank}</p>
+    `
+}
