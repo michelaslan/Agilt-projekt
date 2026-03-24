@@ -331,6 +331,11 @@ function updatePlayer(originalUsername) {
     renderPlayerInfo();
 }
 
+function openStats(team) {
+    localStorage.setItem("selectedTeam", team)
+    window.location.href = "teamstats.html"
+}
+
 function getTeamStats(team) {
     if (!team || team.length === 0) {
         return { error: "Inga spelare i laget" }
