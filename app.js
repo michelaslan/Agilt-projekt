@@ -330,3 +330,13 @@ function updatePlayer(originalUsername) {
     save();
     renderPlayerInfo();
 }
+
+function getTeamStats(team) {
+    if (!team || team.length === 0) {
+        return { error: "Inga spelare i laget" }
+    }
+
+    const count = team.length
+    const avgAge = team.reduce((sum, p) => sum + Number(p.age), 0) / count
+}
+
