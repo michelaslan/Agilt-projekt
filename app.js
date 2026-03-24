@@ -72,8 +72,12 @@ async function loadEuropeanCountries() {
 function renderHome() {
     document.getElementById("teamAName").textContent = teamAName
     document.getElementById("teamBName").textContent = teamBName
+
     const listA = document.getElementById("teamAList")
     const listB = document.getElementById("teamBList")
+    const teamASize = document.getElementById("teamA-p")
+    const teamBSize = document.getElementById("teamB-p")
+    
     listA.innerHTML = ""
     listB.innerHTML = ""
     
@@ -173,15 +177,12 @@ function renderAddPlayer() {
     `
 
     let message = ""
-    
     if (teamA.length >= 7) {
         message += `${teamAName} is full and can't take more players.<br>`
     }
-    
     if (teamB.length >= 7) {
         message += `${teamBName} is full and can't take more players.`
     }
-    
     error.innerHTML = message
 
     loadEuropeanCountries();
@@ -257,7 +258,7 @@ function renderPlayerInfo() {
 
 function editPlayer(username) {
     let player = teamA.find(p => p.username === username) ||
-                 teamB.find(p => p.username === username);
+        teamB.find(p => p.username === username);
 
     const profile = document.getElementById("profile");
 
