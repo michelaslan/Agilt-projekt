@@ -348,11 +348,11 @@ function getTeamStats(team) {
     }
 
 const avgRank = team.reduce((sum, p) => sum + rankingValues[p.ranking], 0) / count
+
 return {
         count,
         avgAge: avgAge.toFixed(1),
         avgRank: avgRank.toFixed(1)
     }
-
 }
 
