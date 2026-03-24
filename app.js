@@ -47,6 +47,28 @@ function renderPlayer(p, team) {
 }
 
 
+async function loadEuropeanCountries() {
+    const select = document.getElementById("country");
+
+    try {
+        const response = await fetch("https://restcountries.com/v3.1/region/europe?fields=name");
+        const countries = await response.json();
+
+        countries.sort((a, b) =>
+            a.name.common.localeCompare(b.name.common)
+        );
+
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country.name.common;
+            option.textContent = country.name.common;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Fel vid hämtning av länder:", error);
+    }
+}
+
 function renderHome() {
     document.getElementById("teamAName").textContent = teamAName
     document.getElementById("teamBName").textContent = teamBName
@@ -98,12 +120,12 @@ function goToPlayer(username) {
 
 function switchTeam(team, username) {
 
-    if (team === "A" && teamB.length < 5) {
+    if (team === "A" && teamB.length < 7) {
         const player = teamA.find(p => p.username === username)
         teamA = teamA.filter(p => p.username !== username)
         teamB.push(player)
     } 
-    else if (team === "B" && teamA.length < 5) {
+    else if (team === "B" && teamA.length < 7) {
         const player = teamB.find(p => p.username === username)
         teamB = teamB.filter(p => p.username !== username)
         teamA.push(player)
@@ -137,43 +159,69 @@ function usernameExists(username) {
 
 
 function renderAddPlayer() {
-
     const teamSelect = document.getElementById("teamSelect")
+    const error = document.getElementById("error")
+
     teamSelect.innerHTML = `
-        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
-        ${teamAName}
+        <option value="A" ${teamA.length >= 7 ? "disabled" : ""}>
+            ${teamAName}${teamA.length >= 7 ? " -full-" : ""}
         </option>
 
-        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
-        ${teamBName}
+        <option value="B" ${teamB.length >= 7 ? "disabled" : ""}>
+            ${teamBName}${teamB.length >= 7 ? " -full-" : ""}
         </option>
-        `
+    `
+
+    let message = ""
+    
+    if (teamA.length >= 7) {
+        message += `${teamAName} is full and can't take more players.<br>`
+    }
+    
+    if (teamB.length >= 7) {
+        message += `${teamBName} is full and can't take more players.`
+    }
+    
+    error.innerHTML = message
 
     loadEuropeanCountries();
-    document.getElementById("playerForm").addEventListener("submit", e => {
 
+    document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
-        const username = document.getElementById("username").value
-        if (usernameExists(username)) {
-            document.getElementById("error").textContent = "Username already exists"
+
+        if (teamA.length >= 7 && teamB.length >= 7) {
+            alert("Both teams are full. You can't add more players.")
             return
         }
+        
+        const team = document.getElementById("teamSelect").value
+
+        if (team === "A" && teamA.length >= 7) {
+            error.textContent = `${teamAName} är fullt.`
+            return
+        }
+
+        if (team === "B" && teamB.length >= 7) {
+            error.textContent = `${teamBName} är fullt.`
+            return
+        }
+
         const player = {
-            username,
+            username: document.getElementById("username").value,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             age: document.getElementById("age").value,
             country: document.getElementById("country").value,
             ranking: document.getElementById("ranking").value
-
         };
-        const team = document.getElementById("teamSelect").value
+
         if (team === "A") {
             teamA.push(player)
         }
         if (team === "B") {
             teamB.push(player)
         }
+
         save()
         window.location.href = "index.html"
     })
