@@ -338,5 +338,16 @@ function getTeamStats(team) {
 
     const count = team.length
     const avgAge = team.reduce((sum, p) => sum + Number(p.age), 0) / count
+    
+    const rankingValues = {
+        Iron: 1,
+        Bronze: 2,
+        Silver: 3,
+        Gold: 4,
+        Diamond: 5
+    }
+    
+const avgRank = team.reduce((sum, p) => sum + rankingValues[p.ranking], 0) / count
+
 }
 
