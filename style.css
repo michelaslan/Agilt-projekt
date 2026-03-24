@@ -235,3 +235,7 @@ p {
 button:hover {
     box-shadow:#02E8FF 0px 0px 10px;
 }
+
+#stats p {
+    color: blanchedalmond;
+}
