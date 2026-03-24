@@ -32,15 +32,13 @@ function renderPlayer(p, team) {
     li.className = "player"
 
     li.innerHTML = `
-        <span onclick="goToPlayer('${p.username}')">${p.username}</span>
-        
-        <div class="player-actions">
-        <button title="Remove Player" class="player-btn" onclick="removePlayer('${team}','${p.username}')">
-            ✘
-        </button>
-        <button title="Switch Team" class="player-btn switch-btn" onclick="switchTeam('${team}','${p.username}')">
-            ⇄
-        </button>
+    <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+    <button onclick="removePlayer('${team}','${p.username}')">
+        Remove
+    </button>
+    <button onclick="switchTeam('${team}','${p.username}')">
+        Switch
+    </button>
     `
 
     return li
@@ -62,31 +60,6 @@ function renderHome() {
     teamB.forEach(p => {
         listB.appendChild(renderPlayer(p, "B"))
     })
-
-    if (teamA.length < 3){
-        teamASize.innerHTML = `
-        Players: ${teamA.length}/7
-        <br>
-        OBS: You need atleast 3 players in the team!
-        `
-    }
-    else {
-        teamASize.innerHTML = `
-        Players: ${teamA.length}/7
-        `
-    }
-    if (teamB.length < 3){
-        teamBSize.innerHTML = `
-        Players: ${teamB.length}/7
-        <br>
-        OBS: You need atleast 3 players in the team!
-        `
-    }
-    else {
-        teamBSize.innerHTML = `
-        Players: ${teamB.length}/7
-        `
-    }
 }
 
 
@@ -188,23 +161,21 @@ function renderPlayerInfo() {
     const profile = document.getElementById("profile");
 
     profile.innerHTML = `
-        <div class="profile">
-            <h3>${player?.username}</h3>
+<div class="profile">
+<h2>${player?.username}</h2>
+<p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
+<p><b>Age:</b> ${player?.age}</p>
+<p><b>Country:</b> ${player?.country}</p>
+<p><b>Ranking:</b> ${player?.ranking}</p>
+<br>
+<button onclick="window.location='home.html'">
+Back
+</button>
 
-            <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
-            <p><b>Age:</b> ${player?.age}</p>
-            <p><b>Country:</b> ${player?.country}</p>
-            <p><b>Ranking:</b> ${player?.ranking}</p>
+</div>
 
-            <div class="profile-actions">
-                <button onclick="window.location='index.html'">
-                Back
-                </button>
-                <button onclick="editPlayer('${player.username}')">Edit</button>
-            </div>
+`
 
-        </div>
-        `
 }
 
 function editPlayer(username) {
@@ -215,7 +186,7 @@ function editPlayer(username) {
 
     profile.innerHTML = `
         <div class="profile">
-            <h4>Edit Player</h4>
+            <h2>Edit Player</h2>
 
             <p><b>Username:</b></p>
             <input id="editUsername" value="${player.username}">
@@ -241,11 +212,9 @@ function editPlayer(username) {
                 <option ${player.ranking === "Diamond" ? "selected" : ""}>Diamond</option>
             </select>
 
-            <br>
-            <div class="profile-actions">
-                <button onclick="updatePlayer('${username}')">Update</button>
-                <button onclick="renderPlayerInfo()">Cancel</button>
-            </div>
+            <br><br>
+            <button onclick="updatePlayer('${username}')">Update</button>
+            <button onclick="renderPlayerInfo()">Cancel</button>
         </div>
     `;
 }

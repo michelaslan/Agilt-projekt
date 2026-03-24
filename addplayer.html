@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Player</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Cutive+Mono&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="app.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="addplayer.html" class="active">Add Player</a>
-        </nav>
-        <h1>E-sports Tournament</h1>
-    </header>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="addplayer.html">Add Player</a>
+    </nav>
+    <h1>Add Player</h1>
     <form id="playerForm">
-        <h2>Add Player</h2>
         <input id="username" placeholder="Username" required>
         <input id="firstname" placeholder="First name" required>
         <input id="lastname" placeholder="Last name" required>
@@ -34,7 +27,7 @@
             <option>Gold</option>
             <option>Diamond</option>
         </select>
-        <br>
+        <br><br>
         <select id="teamSelect"></select>
         <br><br>
         <button>Add Player</button>
@@ -46,4 +39,5 @@
     </script>
 
 </body>
+
 </html>
