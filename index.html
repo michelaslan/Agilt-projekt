@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>E-sports Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Cutive+Mono&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <header>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="addplayer.html">Add Player</a>
+        </nav>
+        <h1>E-sports Tournament</h1>
+    </header>
+    
+    <main>
+        <div class="rename">
+            <div class="renameTeamA">
+                <input id="teamAInput" placeholder="Rename Team A">
+                <button onclick="renameTeam('A')">Rename</button>
+            </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="addplayer.html">Add Player</a>
-    </nav>
-
-    <h1>E-sports Tournament</h1>
-
-    <div class="rename">
-
-        <input id="teamAInput" placeholder="Rename Team A">
-        <button onclick="renameTeam('A')">Rename</button>
-
-        <input id="teamBInput" placeholder="Rename Team B">
-        <button onclick="renameTeam('B')">Rename</button>
-
-    </div>
-
-    <div class="teams">
-
-        <div class="team">
-            <h2 id="teamAName"></h2>
-            <ul id="teamAList"></ul>
+            <div class="renameTeamB">
+                <input id="teamBInput" placeholder="Rename Team B">
+                <button onclick="renameTeam('B')">Rename</button>
+            </div>
         </div>
 
-        <div class="team">
-            <h2 id="teamBName"></h2>
-            <ul id="teamBList"></ul>
-        </div>
+        <div class="teams">
+            <div class="teamA-div">
+                <h3 id="teamAName"></h3>
+                <ul id="teamAList"></ul>
+                <p id="teamA-p"></p>
+            </div>
 
-    </div>
+            <div class="teamB-div">
+                <h3 id="teamBName"></h3>
+                <ul id="teamBList"></ul>
+                <p id="teamB-p"></p>
+            </div>
+        </div>
+    </main>
+    
 
     <script src="app.js"></script>
     <script>
         renderHome()
     </script>
-
 </body>
-
 </html>
