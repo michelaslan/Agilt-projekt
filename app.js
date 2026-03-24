@@ -210,16 +210,20 @@ function renderPlayerInfo() {
 
     profile.innerHTML = `
         <div class="profile">
-        <h2>${player?.username}</h2>
-        <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
-        <p><b>Age:</b> ${player?.age}</p>
-        <p><b>Country:</b> ${player?.country}</p>
-        <p><b>Ranking:</b> ${player?.ranking}</p>
-        <br>
-        <button onclick="window.location='index.html'">
-        Back
-        </button>
-        <button onclick="editPlayer('${player.username}')">Edit</button>
+            <h3>${player?.username}</h3>
+
+            <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
+            <p><b>Age:</b> ${player?.age}</p>
+            <p><b>Country:</b> ${player?.country}</p>
+            <p><b>Ranking:</b> ${player?.ranking}</p>
+
+            <div class="profile-actions">
+                <button onclick="window.location='index.html'">
+                Back
+                </button>
+                <button onclick="editPlayer('${player.username}')">Edit</button>
+            </div>
+
         </div>
         `
 }
@@ -231,7 +235,7 @@ function editPlayer(username) {
 
     profile.innerHTML = `
         <div class="profile">
-            <h2>Edit Player</h2>
+            <h4>Edit Player</h4>
 
             <p><b>Username:</b></p>
             <input id="editUsername" value="${player.username}">
@@ -257,9 +261,11 @@ function editPlayer(username) {
                 <option ${player.ranking === "Diamond" ? "selected" : ""}>Diamond</option>
             </select>
 
-            <br><br>
-            <button onclick="updatePlayer('${username}')">Update</button>
-            <button onclick="renderPlayerInfo()">Cancel</button>
+            <br>
+            <div class="profile-actions">
+                <button onclick="updatePlayer('${username}')">Update</button>
+                <button onclick="renderPlayerInfo()">Cancel</button>
+            </div>
         </div>
     `;
 }

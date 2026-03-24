@@ -41,7 +41,7 @@ header nav a.active {
 
 }
 
-h1 {
+h1, h2 {
     font-family: "Bitcount Grid Double", system-ui;
     font-optical-sizing: auto;
     font-weight: 350;
@@ -84,9 +84,16 @@ input::placeholder {
     color: #02eaff73;
 }
 
-h2 {
+h3 {
     font-family: "VT323", monospace;
     font-size: 34px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+h4 {
+    font-family: "VT323", monospace;
+    font-size: 28px;
     margin-bottom: 12px;
     font-weight: 500;
 }
@@ -141,10 +148,13 @@ main {
 }
 
 .profile {
-    background: white;
+    margin-top: 80px;
+    background: #0A0B37c3;
+    color: #02E8FF;
     padding: 30px;
     border-radius: 10px;
     width: 300px;
+    box-shadow:#02E8FF 0px 0px 10px;
 }
 
 .player-actions {
@@ -161,6 +171,13 @@ main {
     cursor: pointer;
     font-size: 16px;
     color: #02E8FF;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .switch-btn {
@@ -183,5 +200,34 @@ main {
 }
 
 p {
-    margin-top: 14px;
+    margin: 14px 0 6px 0;
+}
+
+#playerForm {
+    margin-top:30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #0a0b37c3;
+    padding: 20px 60px;
+    border-radius: 10px;
+    box-shadow:#02E8FF 0px 0px 10px;
+}
+
+#playerForm input, #playerForm select, .profile input, .profile select {
+    background-color: #0A0B37;
+    color: #02E8FF;
+    padding: 8px;
+    border-radius: 8px;
+    border: solid #000;
+    border-width: 3px 1px 1px 3px;
+}
+
+#playerForm select {
+    border-width: 1px 3px 3px 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:#02E8FF 0px 0px 10px;
 }
