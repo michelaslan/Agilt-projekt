@@ -50,7 +50,7 @@ async function loadEuropeanCountries() {
     try {
         const response = await fetch("https://restcountries.com/v3.1/region/europe?fields=name");
         const countries = await response.json();
-        
+
         countries.sort((a, b) =>
             a.name.common.localeCompare(b.name.common)
         );
@@ -113,10 +113,10 @@ function switchTeam(team, username) {
 
 function removePlayer(team, username) {
     if (team === "A") {
-        teamA.filter(p => p.username !== username)
+        teamA = teamA.filter(p => p.username !== username)
     }
     if (team === "B") {
-        teamB.filter(p => p.username !== username)
+        teamB = teamB.filter(p => p.username !== username)
     }
     save()
     renderHome()
@@ -176,27 +176,33 @@ function renderAddPlayer() {
 function renderPlayerInfo() {
 
     const username = localStorage.getItem("selectedPlayer")
-    const player = teamA.find(p => p.username === username) || teamB.find(p => p.username === username)
+
+    const player = teamA.find(p => p.username === username)
+
     const profile = document.getElementById("profile");
 
     profile.innerHTML = `
-        <div class="profile">
-        <h2>${player?.username}</h2>
-        <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
-        <p><b>Age:</b> ${player?.age}</p>
-        <p><b>Country:</b> ${player?.country}</p>
-        <p><b>Ranking:</b> ${player?.ranking}</p>
-        <br>
-        <button onclick="window.location='index.html'">
-        Back
-        </button>
-        </div>
-        `
+<div class="profile">
+<h2>${player?.username}</h2>
+<p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
+<p><b>Age:</b> ${player?.age}</p>
+<p><b>Country:</b> ${player?.country}</p>
+<p><b>Ranking:</b> ${player?.ranking}</p>
+<br>
+<button onclick="window.location='home.html'">
+Back
+</button>
+
+</div>
+
+`
+
 }
 
 function editPlayer(username) {
+    let player = teamA.find(p => p.username === username) ||
+        teamB.find(p => p.username === username);
 
-    let player = teamA.find(p => p.username === username) || teamB.find(p => p.username === username);
     const profile = document.getElementById("profile");
 
     profile.innerHTML = `
@@ -234,7 +240,6 @@ function editPlayer(username) {
     `;
 }
 
-
 function updatePlayer(originalUsername) {
 
     const newUsername = document.getElementById("editUsername").value;
@@ -259,4 +264,4 @@ function updatePlayer(originalUsername) {
 
     save();
     renderPlayerInfo();
-}
+} 
