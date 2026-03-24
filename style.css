@@ -198,7 +198,11 @@ main {
     background: linear-gradient(#02E8FFcd, #FE9900cd);
     box-shadow: #02E8FF 0px 0px 10px, #FE9900 0px 0px 20px;
 }
-
+#error {
+    color: #fb23a1;
+    font-weight: 600;
+    text-align: center;
+}
 p {
     margin: 14px 0 6px 0;
 }

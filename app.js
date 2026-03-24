@@ -189,6 +189,12 @@ function renderAddPlayer() {
 
     document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
+    
+        const username = document.getElementById("username").value
+        if (usernameExists(username)) {
+            document.getElementById("error").textContent = "Username already exists"
+            return
+        }
 
         if (teamA.length >= 7 && teamB.length >= 7) {
             alert("Both teams are full. You can't add more players.")
